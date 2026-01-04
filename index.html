@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Jonnhy</title>
+        <link href="./output.css" rel="stylesheet" />
+    </head>
+    <body
+        class="flex flex-col items-center text-white bg-desktop justify-between"
+    >
+        <test-head></test-head>
+        <main></main>
+        <div
+            id="md"
+            hx-get="/content.md"
+            hx-trigger="load"
+            hx-swap="innerHTML"
+            hx-on:htmx:afterSwap="
+            (function(el){
+              const md = el.textContent;
+              const conv = new showdown.Converter();
+              el.innerHTML = conv.makeHtml(md);
+            })(this)
+          "
+        ></div>
+        <script src="js/htmx.js"></script>
+        <script type="module" src="components/js/base.js"></script>
+        <script type="module" src="components/js/scaffold.js"></script>
+        <script src="https://unpkg.com/showdown@2.1.0/dist/showdown.min.js"></script>
+    </body>
+</html>

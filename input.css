@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: "MS W98 UI";
+    src:
+        url("./ms-w98-ui-main/Web-TT/MSW98UI-Regular.woff2") format("woff2"),
+        url("./ms-w98-ui-main/Web-TT/MSW98UI-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "MS W98 UI";
+    src:
+        url("./ms-w98-ui-main/Web-TT/MSW98UI-Bold.woff2") format("woff2"),
+        url("./ms-w98-ui-main/Web-TT/MSW98UI-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@theme {
+    --color-desktop: rgb(0 128 128);
+    --color-menu-500: rgb(129 129 129);
+    --color-menu-300: rgb(195 195 195);
+    --color-border: rgb(253 255 255);
+    --font-script: Great Vibes, cursive;
+    --font-ui:
+        "MS W98 UI", system-ui, -apple-system, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    --font-sans:
+        "MS W98 UI", system-ui, -apple-system, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+@utility menu {
+    @apply bg-menu-300;
+    @apply border border-t-border border-b-black border-r-black;
+
+    &:active {
+        @apply border-b-white border-r-white;
+        @apply border-t-black border-l-black;
+    }
+}
+
+@utility btn {
+    @apply cursor-pointer px-2;
+    @apply menu;
+}
+
+button {
+    @apply btn
+}
