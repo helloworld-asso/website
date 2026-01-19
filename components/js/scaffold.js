@@ -6,8 +6,8 @@ customElements.define(
   class Scaffold extends Components {
     component() {
       return `
-      ${load("/components/header.html")}
-      ${load("/components/footer.html")}
+      ${load("components/header.html")}
+      ${load("components/footer.html")}
     `;
     }
   },

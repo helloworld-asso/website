@@ -3,27 +3,97 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Jonnhy</title>
-        <link href="./output.css" rel="stylesheet" />
+                <title>Jonnhy</title>
+                <link href="./output.css" rel="stylesheet" />
+                <style>
+                    /* Minimal Windows 2000 look and feel */
+                    .win-wrap { width: 760px; margin: 4rem auto; }
+                    .win { background: #c0c0c0; border: 2px solid #000; box-shadow: 4px 4px 0 #000; font-family: "MS W98 UI", "MSW98UI-Regular", ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace; font-size:16px; -webkit-font-smoothing: none; text-rendering: optimizeSpeed; }
+                    .win-titlebar { display:flex; align-items:center; justify-content:space-between; padding:4px 6px; background: linear-gradient(#012a6f,#0040a0); color:#fff; font-weight:700; height:28px; border-bottom:2px solid #fff; }
+                    .win-title { display:flex; align-items:center; gap:8px; }
+                    .win-controls { display:flex; gap:4px; }
+                    .win-control { width:18px; height:16px; border:2px solid #fff; border-right-color:#000; border-bottom-color:#000; background:#c0c0c0; box-sizing:content-box; display:inline-flex; align-items:center; justify-content:center; font-size:10px; color:#000; cursor:pointer; }
+                    .win-control:active { transform:translateY(1px); border-top-color:#000; border-left-color:#000; border-right-color:#fff; border-bottom-color:#fff; }
+                    .win-body { padding:12px; background:#e0e0e0; color:#000; min-height:200px; }
+                    .toolbar { display:flex; gap:6px; margin-bottom:8px; }
+                    .tool-btn { padding:4px 8px; border:2px solid #fff; border-right-color:#000; border-bottom-color:#000; background:#d0d0d0; cursor:pointer; }
+                    .tool-btn:active { transform:translateY(1px); border-top-color:#000; border-left-color:#000; border-right-color:#fff; border-bottom-color:#fff; }
+                    .statusbar { border-top:2px solid #000; background:#c0c0c0; padding:4px 8px; font-size:12px; display:flex; justify-content:space-between; }
+                </style>
     </head>
     <body
         class="flex flex-col items-center text-white bg-desktop justify-between"
     >
         <test-head></test-head>
-        <main></main>
-        <div
-            id="md"
-            hx-get="/content.md"
-            hx-trigger="load"
-            hx-swap="innerHTML"
-            hx-on:htmx:afterSwap="
-            (function(el){
-              const md = el.textContent;
-              const conv = new showdown.Converter();
-              el.innerHTML = conv.makeHtml(md);
-            })(this)
-          "
-        ></div>
+                <main class="grow w-full max-w-4xl p-6">
+                    <div class="win-wrap">
+                        <div class="win" role="dialog" aria-label="Presentation Window">
+                            <div class="win-titlebar">
+                                <div class="win-title"><span style="font-size:14px">Hello World - Présentation</span></div>
+                                <div class="win-controls" aria-hidden>
+                                    <button class="win-control" title="Minimize">_</button>
+                                    <button class="win-control" title="Maximize">▢</button>
+                                    <button class="win-control" title="Close">✕</button>
+                                </div>
+                            </div>
+                            <div class="win-body">
+                                <h3 class="font-bold text-xl mb-2">À propos</h3>
+                                <p>
+                                    L'association <strong>Hello World</strong> a été crée en 2015 à l'Université de Montpellier. <br />
+                                    Notre local se trouve à l'étage du (S)pace.
+                                </p>
+                                <br />
+                                <h3 class="font-bold text-xl mb-2">Nos objectifs</h3>
+                                <p>
+                                    Aider les étudiant·es à <strong>se former pour leurs examens.</strong> <br />
+                                    Sensibiliser aux <strong>technologies libres et open source.</strong> <br />
+                                    <strong>Organiser différents évènements,</strong> conférences, goûters, install et LAN parties, etc. <br />
+                                    Gérer une <strong>infrastructure serveurs et réseau.</strong> <br />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="win-wrap">
+                        <div class="win" role="dialog" aria-label="Conference Window">
+                            <div class="win-titlebar">
+                                <div class="win-title"><span style="font-size:14px">Nos prochains événements !</span></div>
+                                <div class="win-controls" aria-hidden>
+                                    <button class="win-control" title="Minimize">_</button>
+                                    <button class="win-control" title="Maximize">▢</button>
+                                    <button class="win-control" title="Close">✕</button>
+                                </div>
+                            </div>
+                            <div class="win-body">
+                                <h3 class="font-bold text-xl mb-2">Journées Portes Ouvertes</h3>
+                                <p>
+                                    Hello World sera présente aux JPO le samedi 14/02 à la MDE du campus Triolet ! Venez discuter et rejoindre l'asso.
+                                </p>
+                                <br />
+                                <h3 class="font-bold text-xl mb-2">Conférence : Open Computing Montpellier</h3>
+                                <p>
+                                    Hello World sera présente aux JPO le samedi 14/02 à la MDE du campus Triolet ! Venez discuter et rejoindre l'asso.
+                                    Les conférences sont gratuites, et vous pouvez proposer un talk.
+
+                                    Plus d'informations : 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <div
+                        id="md"
+                        hx-get="content.md"
+                        hx-trigger="load"
+                        hx-swap="innerHTML"
+                        hx-on:htmx:afterSwap="
+                        (function(el){
+                            const md = el.textContent;
+                            const conv = new showdown.Converter();
+                            el.innerHTML = conv.makeHtml(md);
+                        })(this)
+                    "
+                ></div>
         <script src="js/htmx.js"></script>
         <script type="module" src="components/js/base.js"></script>
         <script type="module" src="components/js/scaffold.js"></script>
